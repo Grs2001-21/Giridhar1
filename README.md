@@ -1,65 +1,49 @@
-"# Giridhar1" 
+# Testing Strategy
 
-## Running Tests Locally
+# 1. Unit Tests
+Approach:
 
-# 1. How to Set Up and Run Tests Locally
-Prerequisites
-Install Python 
-Create and activate a virtual environment
-Setup Instructions
-
-# Clone the repository
-git clone https://github.com/Grs2001-21/Giridhar1.git
-cd Giridhar1
-
-# Create a virtual environment
-python -m venv venv
-
-# Activate the virtual environment
-# On Windows (Git Bash)
-source venv/Scripts/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run tests
-pytest --disable-warnings --cov=app tests/
+> Unit tests focus on testing individual functions and business logic in isolation.
+> External dependencies, such as MongoDB, are mocked using unittest.mock and mongomock.
+> The tests follow the AAA (Arrange, Act, Assert) pattern for clarity and maintainability.
+>Coverage is measured using pytest-cov.
+# Run the following command
+   pytest tests/unit --cov=app
 
 
-# 2. How CI/CD Pipeline Works
-GitHub Actions is used for Continuous Integration (CI)
-Workflow file is located at .github/workflows/test.yml
-The pipeline triggers on push and pull requests to the main branch
-Pipeline Steps:
-Checkout Code: Fetches the latest code from GitHub
-Set Up Python Environment: Installs Python 3.10
-Install Dependencies: Installs project dependencies from requirements.txt
-Run Tests: Executes tests using pytest and generates a coverage report
+# 2. Integration Tests
+Approach:
 
-Final Steps
-After making these updates, commit and push your changes:
+> Integration tests check the API endpoints and simulate real user interactions.
+>The tests use httpx.AsyncClient to make HTTP requests to the FastAPI application.
+> A separate test database is used to avoid affecting real data.
+> Tests cover major CRUD operations (Create, Read, Update, Delete).
+# Run the following command
+ pytest tests/integration --cov=app
 
-git add README.md
-git commit -m "Updated README with test setup and CI/CD details"
-git push origin main
 
-#### **How CI/CD Pipeline Works**
-```md
-## CI/CD Pipeline with GitHub Actions
+# 3. Code Coverage
+  Code coverage is tracked using pytest-cov.
+# Run the following command to check the coverage:
+   pytest --cov=app
 
-### **Pipeline Triggers**
-- Runs automatically on **push** and **pull requests** to the `main` branch.
 
-### **Pipeline Steps**
-1. **Check Out Code**  
-   - Clones the repository.
-   
-2. **Set Up Python Environment**  
-   - Installs Python 3.10 and dependencies.
+### How to Set Up and Run Tests Locally
+   ## Clone the repository
+      git clone https://github.com/Grs2001-21/Giridhar1.git
+      cd Giridhar1
 
-3. **Run Tests**  
-   - Executes all tests using `pytest` with coverage.
+   ## Create a virtual environment
+      python -m venv venv
 
-4. **Deploy (If Implemented)**  
-   - Future enhancement: Auto-deploy on passing tests.
+   ## Activate the virtual environment
+   # On Windows (Git Bash)
+    source venv/Scripts/activate
+
+   ## Install dependencies
+    pip install -r requirements.txt
+
+   ## Run tests
+    pytest --disable-warnings --cov=app tests/
+
 
